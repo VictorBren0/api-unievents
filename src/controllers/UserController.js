@@ -3,7 +3,7 @@ const Yup = require('yup')
 
 module.exports = {
 
-//LISTA TODOS OS USUARIOS
+  //LISTA TODOS OS USUARIOS
   async list(req, res) {
     const { page = 1 } = req.query
 
@@ -15,7 +15,7 @@ module.exports = {
     return res.json(user)
   },
 
-//LISTA O USUARIO ESCOLHIDO
+  //LISTA O USUARIO ESCOLHIDO
   async show(req, res) {
     const { id } = req.params
 
@@ -26,7 +26,7 @@ module.exports = {
     return res.json(user)
   },
 
-//REGISTRA UM USUARIO
+  //REGISTRA UM USUARIO
   async store(req, res) {
     const schema = Yup.object()
       .shape({

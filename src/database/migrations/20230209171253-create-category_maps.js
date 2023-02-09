@@ -3,25 +3,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('maps', {
+    await queryInterface.createTable('category_maps', {
       id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER, 
         primaryKey: true, 
         autoIncrement: true, 
         allowNull: false, 
       },
-      floor: {
-        type: Sequelize.STRING(),
+      category_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: 'categorys', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
-      file: {
-        type: Sequelize.STRING(),
+      map_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        references: { model: 'maps', key: 'id' },
+        onUpdate: 'CASCADE', 
+        onDelete: 'CASCADE', 
       },
       created_at: {
         type: Sequelize.DATE,
@@ -35,6 +36,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('maps')
-  }
+    await queryInterface.dropTable('category_maps')
+  },
 }

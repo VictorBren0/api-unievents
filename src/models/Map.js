@@ -6,6 +6,7 @@ class Map extends Model {
       {
         floor: DataTypes.STRING,
         file: DataTypes.STRING,
+        name: DataTypes.STRING,
         url: {
           type: DataTypes.VIRTUAL,
           get() {
@@ -19,6 +20,13 @@ class Map extends Model {
       }
     )
     return this
+  }
+  static associate(models) {
+    this.belongsToMany(models.Category, {
+      foreignKey: 'map_id',
+      through: 'category_maps',
+      as: 'categorys',
+    })
   }
 }
 
