@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   const authHeader = req.headers.authorization
 
   if (!authHeader) {
-    return res.status(401).json({ error: 'Token não fornecido' })
+    return res.status(401).json({ error: 'Token não fornecido!' })
   }
 
   const [, token] = authHeader.split(' ')
@@ -14,11 +14,11 @@ module.exports = async (req, res, next) => {
   try {
     const tokenDecoded = await promisify(jwt.verify)(token, authConfig.secret)
 
-    req.usuarioID = tokenDecoded.id
+    req.userID = tokenDecoded.id
 
     return next()
   } catch (error) {
-    return res.status(401).json({ error: 'Token invalido' })
+    return res.status(401).json({ error: 'Token invalido!' })
   }
 
 }
