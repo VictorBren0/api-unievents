@@ -13,7 +13,7 @@ const routes = express.Router()
 //AUTENTICAR
 routes.post('/auth', AuthController.login)
 routes.post('/register', UserController.store)
-routes.use(AuthMiddleware)
+
 
 //USUARIO
 routes.get('/users', UserController.list)
@@ -26,6 +26,6 @@ routes.get('/maps/:map_id', MapController.show)
 routes.post('/maps', upload.single('file'), MapController.store)
 routes.delete('/maps/:id', MapController.delete)
 routes.put('/maps/:id', upload.single('file'), MapController.update)
-
+routes.use(AuthMiddleware)
 
 module.exports = routes

@@ -10,7 +10,7 @@ class Map extends Model {
         url: {
           type: DataTypes.VIRTUAL,
           get() {
-            return `http://localhost/uploads/${this.file}`
+            return `http://192.168.100.8:3000/uploads/${this.file}`
           }
         },
 
