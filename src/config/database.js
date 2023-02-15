@@ -3,9 +3,9 @@ require('dotenv/config')
 
 module.exports = {
   dialect: 'mysql',
-  host: 'db4free.net',
-  username: 'victorbreno',
-  password: '12345678',
+  host: 'localhost',
+  username: 'root',
+  password: 'root',
   database: 'apiunigeek',
   port: '3306',
   seedStorage: 'sequelize',
