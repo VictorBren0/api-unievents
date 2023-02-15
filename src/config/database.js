@@ -2,7 +2,7 @@
 require('dotenv/config')
 
 module.exports = {
-  dialect: 'PostgreSQL',
+  dialect: 'postgres',
   host: 'dpg-cfmhh7arrk07m3ua4m0g-a',
   username: 'victor',
   password: 'dexXEONrjfGQLbFmRG8yBatmmDm4hlPW',
