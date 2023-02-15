@@ -2,10 +2,10 @@
 require('dotenv/config')
 
 module.exports = {
-  dialect: 'postgres',
-  host: 'dpg-cfmhh7arrk07m3ua4m0g-a',
-  username: 'victor',
-  password: 'dexXEONrjfGQLbFmRG8yBatmmDm4hlPW',
+  dialect: 'mysql',
+  host: 'db4free.net',
+  username: 'victorbreno',
+  password: '12345678',
   database: 'apiunigeek',
   port: '3306',
   seedStorage: 'sequelize',
