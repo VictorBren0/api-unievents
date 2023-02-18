@@ -5,12 +5,8 @@ module.exports = {
 
   //LISTA TODOS OS USUARIOS
   async list(req, res) {
-    const { page = 1 } = req.query
-
     const user = await User.findAll({
       attributes: ['id', 'login', 'email', 'is_admin'],
-      limit: 20,
-      offset: (page - 1) * 20,
     })
     return res.json(user)
   },
@@ -18,11 +14,9 @@ module.exports = {
   //LISTA O USUARIO ESCOLHIDO
   async show(req, res) {
     const { id } = req.params
-
     const user = await User.findByPk(id, {
       attributes: ['id', 'login', 'email', 'is_admin'],
     })
-
     return res.json(user)
   },
 
@@ -35,7 +29,6 @@ module.exports = {
         password: Yup.string().required().min(8),
       })
       .noUnknown()
-
     try {
       const emailExists = await User.findOne({
         where: {
@@ -74,7 +67,6 @@ module.exports = {
         password_confirm: Yup.string().required().min(8),
       })
       .noUnknown()
-
     try {
       const user = await User.findByPk(req.userID)
 
@@ -88,9 +80,7 @@ module.exports = {
         abortEarly: false,
         stripUnknown: true,
       })
-
       const { login } = await user.update(validFields)
-
       return res.json({ login })
     } catch (error) {
       return res.status(400).json(error)

@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class Category extends Model {
+class Event extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -8,17 +8,17 @@ class Category extends Model {
       },
       {
         sequelize,
-        tableName: 'categorys',
       }
     )
+    return this
   }
   static associate(models) {
-    this.belongsToMany(models.Event, {
-      foreignKey: 'category_id',
+    this.belongsToMany(models.Category, { 
+      foreignKey: 'event_id' ,
       through: 'category_events',
-      as: 'events',
+      as: 'categorys',
     })
   }
 }
 
-module.exports = Category
+module.exports = Event

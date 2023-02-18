@@ -6,6 +6,7 @@ const dbConfig = require('../config/database');
 const User = require('../models/User');
 const Category = require('../models/Category');
 const Map = require('../models/Map');
+const Event = require('../models/Event')
 
 
 
@@ -15,12 +16,13 @@ const connection = new Sequelize(dbConfig)
 User.init(connection)
 Category.init(connection)
 Map.init(connection)
-
+Event.init(connection)
 
 
 
 Category.associate(connection.models)
-Map.associate(connection.models)
+Event.associate(connection.models)
+
 
 
 

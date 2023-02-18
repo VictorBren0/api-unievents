@@ -21,13 +21,6 @@ class Map extends Model {
     )
     return this
   }
-  static associate(models) {
-    this.belongsToMany(models.Category, {
-      foreignKey: 'map_id',
-      through: 'category_maps',
-      as: 'categorys',
-    })
-  }
 }
 
 module.exports = Map

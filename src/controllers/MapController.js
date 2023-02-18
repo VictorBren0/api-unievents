@@ -18,7 +18,7 @@ module.exports = {
     return res.json(map)
   },
 
-//REGISTRA UM MAPA
+  //REGISTRA UM MAPA
   async store(req, res) {
     const { floor } = req.body
     const { originalname, filename } = req.file
@@ -37,18 +37,18 @@ module.exports = {
     }
     await Map.update(
       {
-         floor: floor,
-         name: originalname, 
-         file: filename
+        floor: floor,
+        name: originalname,
+        file: filename
       },
-      { 
-         where: { id: id } 
+      {
+        where: { id: id }
       }
     )
     return res.status(200).json({ mensagem: 'Mapa alterado com sucesso!' })
   },
 
-//DELETA UM MAPA
+  //DELETA UM MAPA
   async delete(req, res) {
     const { id } = req.params
     const map = await Map.findByPk(id)
