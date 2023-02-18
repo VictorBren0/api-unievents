@@ -21,6 +21,13 @@ class Map extends Model {
     )
     return this
   }
+  static associate(models) {
+    this.belongsToMany(models.Event, {
+      foreignKey: 'map_id',
+      through: 'event_maps',
+      as: 'eventslist',
+    })
+  }
 }
 
 module.exports = Map

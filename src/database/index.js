@@ -22,6 +22,7 @@ Event.init(connection)
 
 Category.associate(connection.models)
 Event.associate(connection.models)
+Map.associate(connection.models)
 
 
 

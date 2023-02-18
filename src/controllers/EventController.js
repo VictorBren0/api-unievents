@@ -5,14 +5,22 @@ module.exports = {
 
   //LISTA TODAS AS SUBCATEGORIAS
   async list(req, res) {
-    const event = await Event.findAll()
+    const event = await Event.findAll({
+      include: {
+          association: 'maps',
+      },
+  })
     return res.json(event)
   },
 
   //LISTA A SUBCATEGORIA ESCOLHIDA
   async show(req, res) {
     const { event_id } = req.params
-    const event = await Event.findByPk(event_id)
+    const event = await Event.findByPk(event_id, {
+      include: {
+          association: 'maps',
+      },
+  })
     if (!event) {
       return res.status(400).json({ error: 'Evento não encontrado!' })
     }

@@ -17,6 +17,11 @@ class Event extends Model {
       foreignKey: 'event_id' ,
       through: 'category_events',
       as: 'categorys',
+    }),
+    this.belongsToMany(models.Map, { 
+      foreignKey: 'event_id' ,
+      through: 'event_maps',
+      as: 'maps',
     })
   }
 }
