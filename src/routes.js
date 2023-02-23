@@ -30,6 +30,10 @@ routes.post('/maps', upload.single('file'), MapController.store)
 routes.delete('/maps/:id', MapController.delete)
 routes.put('/maps/:id', upload.single('file'), MapController.update)
 
+routes.get('/maps/:map_id/events', MapController.listEventFromMap);
+routes.post('/maps/:map_id/events/:event_id', MapController.storeEventToMap);
+routes.delete('/maps/:map_id/events/:event_id', MapController.deleteEventFromMap);
+
 
 //CATEGORIAS
 routes.get('/categorys', CategoryController.list)
@@ -44,6 +48,7 @@ routes.get('/events/:event_id', EventController.show)
 routes.post('/categorys/:category_id/events', EventController.store)
 routes.delete('/categorys/:category_id/events', EventController.delete)
 routes.put('/categorys/:category_id/events/:id', EventController.update)
+
 
 
 

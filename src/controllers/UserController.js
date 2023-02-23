@@ -3,22 +3,35 @@ const Yup = require('yup')
 
 module.exports = {
 
-  //LISTA TODOS OS USUARIOS
-  async list(req, res) {
+ //LISTA TODOS OS USUARIOS
+async list(req, res) {
+  try {
     const user = await User.findAll({
       attributes: ['id', 'login', 'email', 'is_admin'],
     })
     return res.json(user)
-  },
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ error: 'Erro ao listar usuários.' })
+  }
+},
 
-  //LISTA O USUARIO ESCOLHIDO
-  async show(req, res) {
+//LISTA O USUARIO ESCOLHIDO
+async show(req, res) {
+  try {
     const { id } = req.params
     const user = await User.findByPk(id, {
       attributes: ['id', 'login', 'email', 'is_admin'],
     })
+    if (!user) {
+      return res.status(400).json({ error: 'Usuário não encontrado!' })
+    }
     return res.json(user)
-  },
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ error: 'Erro ao buscar usuário.' })
+  }
+},
 
   //REGISTRA UM USUARIO
   async store(req, res) {
@@ -57,6 +70,7 @@ module.exports = {
     } catch (error) {
       return res.status(400).json(error)
     }
+    
   },
 
   //ATUALIZA UM USUARIO

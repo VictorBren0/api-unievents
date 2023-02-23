@@ -25,7 +25,7 @@ class Map extends Model {
     this.belongsToMany(models.Event, {
       foreignKey: 'map_id',
       through: 'event_maps',
-      as: 'eventslist',
+      as: 'events',
     })
   }
 }

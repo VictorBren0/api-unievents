@@ -1,96 +1,118 @@
 const Event = require('../models/Event')
 const Category = require('../models/Category')
 
+
 module.exports = {
 
-  //LISTA TODAS AS SUBCATEGORIAS
+  //LISTA TODOS OS EVENTOS
   async list(req, res) {
-    const event = await Event.findAll({
-      include: {
+    try {
+      const event = await Event.findAll({
+        include: {
           association: 'maps',
-      },
-  })
-    return res.json(event)
+        },
+      });
+      return res.json(event);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Ocorreu um erro ao buscar os eventos.' });
+    }
   },
 
-  //LISTA A SUBCATEGORIA ESCOLHIDA
+  //LISTA O EVENTO ESCOLHIDO
   async show(req, res) {
-    const { event_id } = req.params
-    const event = await Event.findByPk(event_id, {
-      include: {
+    try {
+      const { event_id } = req.params;
+      const event = await Event.findByPk(event_id, {
+        include: {
           association: 'maps',
-      },
-  })
-    if (!event) {
-      return res.status(400).json({ error: 'Evento não encontrado!' })
+        },
+      });
+      if (!event) {
+        return res.status(400).json({ error: 'Evento não encontrado!' });
+      }
+      return res.json(event);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Ocorreu um erro ao buscar o evento.' });
     }
-    return res.json(event)
   },
 
-  //REGISTRA UMA SUBCATEGORIA
+  //REGISTRA UM EVENTO
   async store(req, res) {
-    const { category_id } = req.params;
-    const { title } = req.body;
-  
-    const category = await Category.findByPk(category_id)
-  
-    if (!category) {
-      return res.status(400).json({ error: 'Categoria não encontrada!' });
-    }
-  
-    const [event] = await Event.findOrCreate({
-      where: { title },
-    });
-  
-    await category.addEvent(event);
-  
-    return res.json(event);
-  },
-  
+    try {
+      const { category_id } = req.params;
+      const { title } = req.body;
 
-  //ATUALIZA UMA SUBCATEGORIA
+      const category = await Category.findByPk(category_id);
+
+      if (!category) {
+        return res.status(400).json({ error: 'Categoria não encontrada!' });
+      }
+
+      const [event] = await Event.findOrCreate({
+        where: { title },
+      });
+
+      await category.addEvent(event);
+
+      return res.json(event);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Ocorreu um erro ao registrar o evento.' });
+    }
+  },
+
+  //ATUALIZA UM EVENTO
   async update(req, res) {
-    const { id } = req.params
-    const { category_id } = req.params
-    const { title } = req.body
+    try {
+      const { id } = req.params
+      const { category_id } = req.params
+      const { title } = req.body
 
-    const category = await Category.findByPk(category_id)
-    if (!category) {
-      return res.status(400).json({ error: 'Categoria não encontrada!' })
+      const category = await Category.findByPk(category_id)
+      if (!category) {
+        return res.status(400).json({ error: 'Categoria não encontrada!' })
+      }
+
+      const event = await Event.findByPk(id)
+      if (!event) {
+        return res.status(400).json({ error: 'Evento não encontrado!' })
+      }
+
+      await Event.update(
+        {
+          title: title,
+        },
+        { where: { id: id } }
+      )
+
+      return res.status(200).json({ mensagem: 'Evento alterado com sucesso!' })
+    } catch (error) {
+      return res.status(400).json(error)
     }
-
-    const event = await Event.findByPk(id)
-    if (!event) {
-      return res.status(400).json({ error: 'Evento não encontrado!' })
-    }
-
-    await Event.update(
-      {
-        title: title,
-      },
-      { where: { id: id } }
-    )
-
-    return res.status(200).json({ mensagem: 'Evento alterado com sucesso!' })
   },
-
+  //DELETA UM EVENTO
   async delete(req, res) {
-    const { category_id } = req.params
-    const { id } = req.body
-    const category = await Category.findByPk(category_id)
-    if (!category) {
-      return res.status(400).json({ error: 'Categoria não encontrada!' })
-    }
+    try {
+      const { category_id } = req.params
+      const { id } = req.body
+      const category = await Category.findByPk(category_id)
+      if (!category) {
+        return res.status(400).json({ error: 'Categoria não encontrada!' })
+      }
 
-    const event = await Event.findOne({
-      where: { id },
-    })
-    if (!event) {
-      return res.status(400).json({ error: 'SubCategoria não encontrada!' })
+      const event = await Event.findOne({
+        where: { id },
+      })
+      if (!event) {
+        return res.status(400).json({ error: 'SubCategoria não encontrada!' })
+      }
+      await category.removeEvent(event)
+      return res.status(200).json({ mensagem: 'Evento deletado com sucesso!' })
+    } catch (error) {
+      return res.status(400).json(error)
     }
-    await category.removeEvent(event)
-    return res.status(200).json({ mensagem: 'Evento deletado com sucesso!' })
   },
-
 
 }
