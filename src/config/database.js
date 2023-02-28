@@ -6,7 +6,7 @@ module.exports = {
   host: 'localhost',
   username: 'root',
   password: 'root',
-  database: 'bemfamiliaapi',
+  database: 'unigeek',
   port: '3306',
   seedStorage: 'sequelize',
   define: {
