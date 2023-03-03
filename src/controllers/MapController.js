@@ -7,7 +7,11 @@ module.exports = {
   //LISTA TODOS OS MAPAS
   async list(req, res) {
     try {
-      const maps = await Map.findAll()
+      const maps = await Map.findAll({
+        include: {
+            association: 'events',
+        },
+    })
       return res.json(maps)
     } catch (error) {
       return res.status(500).json({ error: 'Ocorreu um erro ao buscar os mapas.' })
