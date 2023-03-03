@@ -55,6 +55,6 @@ routes.put('/categorys/:category_id/events/:id', EventController.update)
 
 
 
-routes.use(AuthMiddleware)
+/* routes.use(AuthMiddleware) */
 
 module.exports = routes
