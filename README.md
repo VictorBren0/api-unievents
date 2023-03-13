@@ -18,4 +18,4 @@ create database unigeek
 **3. Altere o nome de usuário e a senha do Mysql de acordo com sua instalação**
 
 + abra `src/config/database.js`
-+ altere `host: 'localhost',` and `username: 'root',` and `password: 'root',` conforme sua instalação do mysql
++ altere `host: 'localhost'`, `username: 'root'` e `password: 'root'` conforme sua instalação do mysql
