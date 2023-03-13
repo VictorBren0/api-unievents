@@ -19,3 +19,12 @@ create database unigeek
 
 + abra `src/config/database.js`
 + altere `host: 'localhost'`, `username: 'root'` e `password: 'root'` conforme sua instalação do mysql
++ execute o comando 
+Usando YARN```bash
+yarn sequelize db:migrate
+```
+ou
+Usando NPM
+```bash
+npx sequelize db:migrate
+```
