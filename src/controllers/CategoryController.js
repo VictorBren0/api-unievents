@@ -49,7 +49,7 @@ module.exports = {
         try {
             const schema = Yup.object()
                 .shape({
-                    title: Yup.string().required().min(2).max(12),
+                    title: Yup.string().required().min(2).max(36),
                 })
                 .noUnknown()
             const validFields = await schema.validate(req.body, {

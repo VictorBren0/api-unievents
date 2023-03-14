@@ -5,6 +5,9 @@ class Event extends Model {
     super.init(
       {
         title: DataTypes.STRING,
+        date: DataTypes.STRING,
+        time: DataTypes.STRING,
+        description: DataTypes.STRING,
       },
       {
         sequelize,

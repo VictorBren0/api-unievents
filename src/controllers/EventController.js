@@ -42,7 +42,7 @@ module.exports = {
   async store(req, res) {
     try {
       const { category_id } = req.params;
-      const { title } = req.body;
+      const { title, date, time, description } = req.body;
 
       const category = await Category.findByPk(category_id);
 
@@ -51,7 +51,7 @@ module.exports = {
       }
 
       const [event] = await Event.findOrCreate({
-        where: { title },
+        where: { title, date, time, description },
       });
 
       await category.addEvent(event);
@@ -68,7 +68,7 @@ module.exports = {
     try {
       const { id } = req.params
       const { category_id } = req.params
-      const { title } = req.body
+      const { title, date, time, description } = req.body
 
       const category = await Category.findByPk(category_id)
       if (!category) {
@@ -83,6 +83,9 @@ module.exports = {
       await Event.update(
         {
           title: title,
+          date: date, 
+          time: time, 
+          description: description
         },
         { where: { id: id } }
       )
