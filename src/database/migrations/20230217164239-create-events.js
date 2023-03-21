@@ -26,6 +26,14 @@ module.exports = {
         type: Sequelize.STRING(),
         allowNull: false,
       },
+      posy: {
+        type: Sequelize.DOUBLE(),
+        allowNull: true,
+      },
+      posx: {
+        type: Sequelize.DOUBLE(),
+        allowNull: true,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

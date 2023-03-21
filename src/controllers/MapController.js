@@ -9,9 +9,9 @@ module.exports = {
     try {
       const maps = await Map.findAll({
         include: {
-            association: 'events',
+          association: 'events',
         },
-    })
+      })
       return res.json(maps)
     } catch (error) {
       return res.status(500).json({ error: 'Ocorreu um erro ao buscar os mapas.' })
@@ -92,6 +92,7 @@ module.exports = {
   //ADICIONA UM EVENTO A UM MAPA
   async storeEventToMap(req, res) {
     const { map_id, event_id } = req.params;
+    const { posy, posx } = req.body;
 
     try {
       const map = await Map.findByPk(map_id, {
@@ -110,6 +111,8 @@ module.exports = {
       if (!event) {
         return res.status(400).json({ error: 'Evento não encontrado!' });
       }
+
+      await event.update({ posy, posx });
 
       await map.addEvent(event);
 
@@ -152,7 +155,7 @@ module.exports = {
     }
   },
 
- //LISTA TODOS OS EVENTOS DE UM MAPA
+  //LISTA TODOS OS EVENTOS DE UM MAPA
   async listEventFromMap(req, res) {
     try {
       const { map_id } = req.params;

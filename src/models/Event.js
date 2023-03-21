@@ -8,6 +8,8 @@ class Event extends Model {
         date: DataTypes.STRING,
         time: DataTypes.STRING,
         description: DataTypes.STRING,
+        posy: DataTypes.DOUBLE,
+        posx: DataTypes.DOUBLE
       },
       {
         sequelize,
