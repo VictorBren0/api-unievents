@@ -36,6 +36,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('category_subcategorys')
+    await queryInterface.dropTable('category_events')
   },
 }
